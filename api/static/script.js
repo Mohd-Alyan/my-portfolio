@@ -30,7 +30,6 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 
 faders.forEach(section => appearOnScroll.observe(section));
 
-
 // Email link handler for Gmail
 document.querySelectorAll('.email-link').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -40,7 +39,6 @@ document.querySelectorAll('.email-link').forEach(link => {
         window.open(`https://mail.google.com/mail/?view=cm&to=${email}`, '_blank');
     });
 });
-
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -54,6 +52,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Check if device is mobile
+function isMobile() {
+    return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 // Sections & links for active highlighting
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -62,9 +65,11 @@ window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;
     const navbar = document.querySelector('.navbar');
 
+    // Update navbar background based on scroll
     navbar.style.background = scrolled > 100 ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)';
     navbar.style.boxShadow = scrolled > 100 ? '0 2px 20px rgba(0, 0, 0, 0.1)' : 'none';
 
+    // Active nav link highlighting
     let current = '';
     sections.forEach(section => {
         if (scrolled >= (section.offsetTop - 200)) current = section.getAttribute('id');
@@ -74,11 +79,19 @@ window.addEventListener('scroll', () => {
         if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
     });
 
-    const heroContent = document.querySelector('.hero-content');
-    const heroImage = document.querySelector('.hero-image');
-    if (heroContent && heroImage) {
-        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-        heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
+    // Parallax effect - only on desktop to prevent mobile overlap issues
+    if (!isMobile()) {
+        const heroContent = document.querySelector('.hero-content');
+        const heroImage = document.querySelector('.hero-image');
+        if (heroContent && heroImage) {
+            // Reduce parallax intensity and add bounds checking
+            const maxTransform = 100; // Maximum transform value
+            const contentTransform = Math.min(scrolled * 0.2, maxTransform);
+            const imageTransform = Math.min(scrolled * 0.1, maxTransform);
+            
+            heroContent.style.transform = `translateY(${contentTransform}px)`;
+            heroImage.style.transform = `translateY(${imageTransform}px)`;
+        }
     }
 });
 
@@ -108,8 +121,10 @@ const progressObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.tech-card').forEach(card => progressObserver.observe(card));
 
-// Particle effect (limit 30)
+// Particle effect (limit 30) - only on desktop
 function createParticle() {
+    if (isMobile()) return; // Skip particles on mobile for better performance
+    
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.cssText = `
@@ -128,10 +143,14 @@ function createParticle() {
         setTimeout(() => { particle.remove(); }, 8000);
     }
 }
-setInterval(() => {
-    const hero = document.querySelector('.hero');
-    if (hero && hero.querySelectorAll('.particle').length < 30) createParticle();
-}, 2000);
+
+// Only create particles on desktop
+if (!isMobile()) {
+    setInterval(() => {
+        const hero = document.querySelector('.hero');
+        if (hero && hero.querySelectorAll('.particle').length < 30) createParticle();
+    }, 2000);
+}
 
 // Profile image fallback
 document.addEventListener('DOMContentLoaded', () => {
@@ -144,13 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Social links hover
+// Social links hover effects
 document.querySelectorAll('.social-link').forEach(link => {
     link.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-5px) scale(1.1)';
+        if (!isMobile()) { // Only apply hover effects on desktop
+            this.style.transform = 'translateY(-5px) scale(1.1)';
+        }
     });
     link.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
+        if (!isMobile()) {
+            this.style.transform = 'translateY(0) scale(1)';
+        }
     });
 });
 
@@ -158,3 +181,61 @@ document.querySelectorAll('.social-link').forEach(link => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
+
+// Handle orientation changes for mobile devices
+window.addEventListener('orientationchange', () => {
+    // Reset any transforms that might cause issues after orientation change
+    setTimeout(() => {
+        if (isMobile()) {
+            const heroContent = document.querySelector('.hero-content');
+            const heroImage = document.querySelector('.hero-image');
+            if (heroContent) heroContent.style.transform = 'none';
+            if (heroImage) heroImage.style.transform = 'none';
+        }
+    }, 100);
+});
+
+// Resize event handler to update mobile detection
+window.addEventListener('resize', () => {
+    // Reset transforms if switching to mobile view
+    if (isMobile()) {
+        const heroContent = document.querySelector('.hero-content');
+        const heroImage = document.querySelector('.hero-image');
+        if (heroContent) heroContent.style.transform = 'none';
+        if (heroImage) heroImage.style.transform = 'none';
+    }
+});
+
+// Prevent iOS Safari bounce scroll effect
+document.addEventListener('touchmove', function(e) {
+    if (e.target.closest('.nav-menu')) {
+        return; // Allow scrolling in navigation menu
+    }
+    // Only prevent if at the edges of the document
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+    
+    if (scrollTop === 0 || scrollTop + clientHeight >= scrollHeight) {
+        // At top or bottom, allow but prevent rubber band effect
+        return;
+    }
+}, { passive: false });
+
+// Add CSS for particle animation if not on mobile
+if (!isMobile()) {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}

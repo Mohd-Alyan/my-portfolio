@@ -353,16 +353,6 @@ body.nav-open {
     50% { transform: scale(1.02); opacity: 1; }
 }
 
-.profile-image {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto 2rem;
-    border: 4px solid var(--primary-color);
-    position: relative;
-    box-shadow: var(--glow);
-}
 #plexus-canvas {
   position: fixed;
   top: 0; left: 0;

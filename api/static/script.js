@@ -332,12 +332,6 @@ window.addEventListener('load', () => {
     if (heroTitle) {
         setTimeout(() => {
             heroTitle.style.animation = 'none';
-            heroTitle.style.textShadow = `
-                0 0 10px rgba(255, 107, 53, 0.8),
-                0 0 20px rgba(255, 107, 53, 0.6),
-                0 0 30px rgba(255, 107, 53, 0.4),
-                0 0 40px rgba(255, 107, 53, 0.2)
-            `;
         }, 1500);
     }
 });

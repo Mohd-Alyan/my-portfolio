@@ -363,25 +363,6 @@ body.nav-open {
     position: relative;
     box-shadow: var(--glow);
 }
-
-.profile-image::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top: 3px solid var(--primary-color);
-    border-right: 3px solid var(--accent-color);
-    border-bottom: 3px solid var(--primary-color);
-    border-left: 3px solid var(--accent-color);
-    animation: rotateRing 3s linear infinite;
-    z-index: -1;
-    box-shadow: 0 0 20px var(--primary-color);
-}
-
 #plexus-canvas {
   position: fixed;
   top: 0; left: 0;

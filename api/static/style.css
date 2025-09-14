@@ -382,9 +382,12 @@ body.nav-open {
     box-shadow: 0 0 20px var(--primary-color);
 }
 
-@keyframes rotateRing {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+#plexus-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .profile-image img {

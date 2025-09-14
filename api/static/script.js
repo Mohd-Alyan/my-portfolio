@@ -206,20 +206,38 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Prevent iOS Safari bounce scroll effect
+// Prevent iOS Safari bounce scroll effect and handle touch events
 document.addEventListener('touchmove', function(e) {
-    if (e.target.closest('.nav-menu')) {
-        return; // Allow scrolling in navigation menu
+    // Allow scrolling in navigation menu
+    if (e.target.closest('.nav-menu') && !body.classList.contains('nav-open')) {
+        return;
     }
-    // Only prevent if at the edges of the document
+    
+    // Prevent scrolling when mobile menu is open
+    if (body.classList.contains('nav-open')) {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Prevent rubber band effect at document edges
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
     const clientHeight = document.documentElement.clientHeight || window.innerHeight;
     
-    if (scrollTop === 0 || scrollTop + clientHeight >= scrollHeight) {
-        // At top or bottom, allow but prevent rubber band effect
-        return;
+    if (scrollTop === 0 && e.touches[0].clientY > e.touches[0].startY) {
+        e.preventDefault();
     }
+    
+    if (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].startY) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Track touch start position
+let touchStartY = 0;
+document.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+    e.touches[0].startY = touchStartY;
 }, { passive: false });
 
 // Add CSS for particle animation if not on mobile

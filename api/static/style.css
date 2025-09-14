@@ -572,11 +572,6 @@ section::before {
     animation: rotate 10s linear infinite;
 }
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .tech-icon { 
     font-size: 4rem; 
     margin-bottom: 1.5rem; 

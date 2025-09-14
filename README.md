@@ -6,7 +6,7 @@ This project showcases my skills, projects, and experience as a developer, built
 ---
 
 ## 🚀 Live Demo
-🔗https://your-live-link.com](https://mohd-alyan.vercel.app/
+🔗https://mohd-alyan.vercel.app/
 
 ---
 

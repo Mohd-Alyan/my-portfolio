@@ -273,10 +273,6 @@ body.nav-open {
     margin-bottom: 1rem;
     line-height: 1.1;
     animation: fadeInLeft 1.2s ease-out;
-    text-shadow: 
-        0 0 10px var(--primary-color),
-        0 0 20px var(--primary-color),
-        0 0 30px var(--primary-color);
     letter-spacing: 3px;
     background: var(--gradient-primary);
     -webkit-background-clip: text;

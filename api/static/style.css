@@ -233,7 +233,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -262,7 +261,6 @@ body {
     transform: translateY(0);
 }
 
-
 .social-link {
     display: flex;
     align-items: center;
@@ -279,7 +277,6 @@ body {
     transform: translateY(-5px) scale(1.15);
     background: rgba(255,255,255,0.4);
 }
-
 
 /* Scroll indicator */
 .scroll-indicator { position: absolute; bottom:2rem; left:50%; transform: translateX(-50%); z-index:2; }
@@ -342,75 +339,347 @@ section { padding: 6rem 0; }
 @keyframes slideInLeft { from {opacity:0; transform:translateX(-50px);} to {opacity:1; transform:translateX(0);} }
 @keyframes slideInRight { from {opacity:0; transform:translateX(50px);} to {opacity:1; transform:translateX(0);} }
 
-/* Responsive */
+/* Desktop and Large Tablets */
 @media (max-width: 1024px) {
-    .hero-container { grid-template-columns:1fr; gap:2rem; text-align:center; }
-    .nav-menu { position: fixed; top: 70px; right: -100%; flex-direction: column; width: 200px; background: var(--surface); height: calc(100vh - 70px); transition: right 0.3s ease; padding-top:2rem; }
-    .nav-menu.active { right:0; }
-    .hamburger { display:flex; }
-    .nav-link { margin:1rem 0; }
+    .hero-container { 
+        grid-template-columns: 1fr; 
+        gap: 3rem; 
+        text-align: center; 
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .nav-menu { 
+        position: fixed; 
+        top: 70px; 
+        right: -100%; 
+        flex-direction: column; 
+        width: 200px; 
+        background: var(--surface); 
+        height: calc(100vh - 70px); 
+        transition: right 0.3s ease; 
+        padding-top: 2rem; 
+    }
+    .nav-menu.active { right: 0; }
+    .hamburger { display: flex; }
+    .nav-link { margin: 1rem 0; }
 }
-
-/* Extra Responsive Fixes */
 
 /* Tablets */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hero {
+        padding: 0 0 4rem 0;
+    }
+    
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
+        padding: 4rem 1.5rem 2rem;
+        min-height: calc(100vh - 4rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
+    
+    .hero-content {
+        order: 1;
+        margin-bottom: 2rem;
+        z-index: 10;
+        position: relative;
+    }
+    
+    .hero-image {
+        order: 2;
+        margin-bottom: 2rem;
+        z-index: 5;
+        position: relative;
+    }
+    
     .hero-title {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
     }
+    
     .hero-subtitle {
         font-size: 1.2rem;
+        margin-bottom: 1rem;
     }
+    
     .hero-description {
         font-size: 1rem;
+        margin-bottom: 2rem;
     }
+    
     .profile-image {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
     }
+    
+    .profile-card {
+        padding: 1.5rem;
+        margin: 0 auto;
+        max-width: 280px;
+    }
+    
     .section-title {
         font-size: 2rem;
     }
+    
     section {
-        padding: 4rem 1.5rem;
+        padding: 4rem 0;
     }
-}
-
-/* Phones */
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    .hero-container {
-        padding: 0 1rem;
-    }
-    .profile-card {
-        padding: 1.5rem;
-    }
-    .nav-menu {
-        width: 100%;   /* full screen menu on small devices */
-        text-align: center;
-    }
-    .nav-link {
-        font-size: 1.1rem;
-    }
-    .projects-grid,
-    .tech-grid {
-        grid-template-columns: 1fr; /* single column for better readability */
-    }
+    
     .education-card {
         flex-direction: column;
         text-align: center;
+        gap: 1rem;
     }
+    
     .education-icon {
         margin-bottom: 1rem;
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .nav-container {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+    
+    .hero {
+        padding: 0;
+        min-height: 100vh;
+    }
+    
+    .hero-container {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+        min-height: calc(100vh - 2rem);
+        justify-content: space-evenly;
+    }
+    
+    .hero-content {
+        margin-bottom: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+    
+    .profile-card {
+        padding: 1rem;
+        margin: 0 auto;
+        max-width: 240px;
+    }
+    
+    .profile-image {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 1rem;
+    }
+    
+    .social-links {
+        gap: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nav-menu {
+        width: 100%;
+        text-align: center;
+        right: -100%;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+        display: block;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .about-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .tech-card {
+        padding: 1.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .education-card {
+        padding: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .scroll-indicator {
+        bottom: 1rem;
+    }
+    
+    .scroll-arrow {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 320px) {
+    .hero-container {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .hero-description {
+        font-size: 0.85rem;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-card {
+        max-width: 200px;
+        padding: 0.75rem;
+    }
+}
+
+/* Disable parallax effects on mobile for better performance */
+@media (max-width: 768px) {
+    .hero::before {
+        animation: none;
+    }
+    
+    /* Disable parallax scroll effects on mobile */
+    .hero-content,
+    .hero-image {
+        transform: none !important;
+    }
+}
+
+/* Fix for landscape mobile orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 2rem 0;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        min-height: auto;
+        padding: 2rem 1.5rem;
+        text-align: left;
+    }
+    
+    .hero-content {
+        order: 1;
+        margin-bottom: 0;
+    }
+    
+    .hero-image {
+        order: 2;
+        margin-bottom: 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-card {
+        padding: 1rem;
+        max-width: 200px;
     }
 }

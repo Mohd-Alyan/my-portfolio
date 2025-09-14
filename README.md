@@ -5,7 +5,7 @@ This project showcases my skills, projects, and experience as a developer, built
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Site
 🔗https://mohd-alyan.vercel.app/
 
 ---

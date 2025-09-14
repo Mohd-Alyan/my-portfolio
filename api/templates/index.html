@@ -23,8 +23,10 @@
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
             </ul>
-            <div class="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
+            <div class="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </div>
         </div>
     </nav>
@@ -110,7 +112,7 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">{{ project.title }}</h3>
-                        <a href="{{ project.github }}" target="_blank" class="project-link">
+                        <a href="{{ project.github }}" target="_blank" class="project-link" aria-label="View project on GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>

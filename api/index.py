@@ -31,6 +31,12 @@ def home():
                 'technologies': ['Html', 'CSS', 'Git', 'JavaScript'],
                 'github': 'https://github.com/Mohd-Alyan/img-to-pdf-'
             },
+            {
+                'title': 'Passlocker - A Password encryptor/Decrypter',
+                'description': 'Built a Browser Based Password Encryptor/Decryptor that uses RAS Encryption system to encrytp the text and returs the cypher and key text file which the user can use to decrypt.',
+                'technologies': ['Python','Flask','Html', 'CSS', 'Git', 'JavaScript'],
+                'github': 'https://github.com/Mohd-Alyan/passlocker'
+            },
         ],
         'education': {
             'degree': 'Pursuing Bachelor of Technology in Computer Science Engineering',
